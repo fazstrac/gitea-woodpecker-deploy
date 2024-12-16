@@ -1,6 +1,6 @@
 # Deploy Gitea+PostgreSQL and Woodpecker-CI via Quadlet
 
-This repository contain my take on how to deploy [Gitea](https://about.gitea.com/) + [PostgreSQL](https://www.postgresql.org/) and [Woodpecker-CI](https://woodpecker-ci.org/) into two separete [Podman POD](https://podman.io). I wrote as a document to myself and to remind me how to do this, should my homelab fail at some point.
+This repository contain my take on how to deploy [Gitea](https://about.gitea.com/) + [PostgreSQL](https://www.postgresql.org/) and [Woodpecker-CI](https://woodpecker-ci.org/) into two separate [Podman](https://podman.io) PODs. I wrote as a document to myself and to remind me how to do this, should my homelab fail at some point.
 
 ## Instructions how to use
 
