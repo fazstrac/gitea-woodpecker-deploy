@@ -1,0 +1,22 @@
+[Unit]
+Description=Gitea DB Server
+
+[Container]
+Pod=gitea.pod
+ContainerName=gitea_db
+Image=docker.io/library/postgres:17.2-bookworm
+Environment=POSTGRES_PASSWORD=areasonablysecurepassword123
+Environment=POSTGRES_USER=gitea
+Environment=POSTGRES_DB=gitea
+Volume=%h/postgresql:/var/lib/postgresql/data
+Volume=/etc/timezone:/etc/timezone:ro
+Volume=/etc/localtime:/etc/localtime:ro
+HealthCmd=nc -z 127.0.0.1 5432
+
+[Service]
+Restart=on-failure
+TimeoutStartSec=300
+
+[Install]
+WantedBy=default.target
+

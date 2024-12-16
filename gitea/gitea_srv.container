@@ -1,0 +1,29 @@
+[Unit]
+Description=Gitea Server
+Requires=gitea_db.service
+After=gitea_db.service
+
+[Container]
+Pod=gitea.pod
+ContainerName=gitea_srv
+Image=docker.io/gitea/gitea:1.22.4
+Environment=USER_ID=10000
+Environment=USER_GID=10000
+Environment=DB_TYPE=postgres
+Environment=DB_HOST=localhost:5432
+Environment=DB_NAME=gitea
+Environment=DB_PASSWD=areasonablysecurepassword123
+Environment=DB_USER=gitea
+Volume=%h/gitea:/data
+Volume=/etc/timezone:/etc/timezone:ro
+Volume=/etc/localtime:/etc/localtime:ro
+
+HealthCmd=nc -z 127.0.0.1 5432
+
+[Service]
+Restart=on-failure
+TimeoutStartSec=300
+
+[Install]
+WantedBy=default.target
+

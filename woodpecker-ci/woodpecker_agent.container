@@ -1,0 +1,22 @@
+[Unit]
+Description=WoodpeckerCI Agent
+Requires=woodpecker_srv.service
+After=woodpecker_srv.service
+
+[Container]
+Pod=woodpecker-ci.pod
+ContainerName=woodpecker_agent
+Image=docker.io/woodpeckerci/woodpecker-agent:latest-alpine
+Environment=WOODPECKER_SERVER=localhost:9000
+Environment=WOODPECKER_AGENT_SECRET=anotherreasonablysecurepassword
+Environment=WOODPECKER_HEALTHCHECK=true
+Volume=/etc/ssl/woodpecker:/etc/ssl/woodpecker:ro
+Volume=%h/woodpecker_agent:/etc/woodpecker
+
+[Service]
+Restart=on-failure
+TimeoutStartSec=300
+
+[Install]
+WantedBy=default.target
+

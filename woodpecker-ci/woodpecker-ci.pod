@@ -1,0 +1,5 @@
+[Pod]
+Network=woodpecker.network
+PodName=woodpecker
+PublishPort=8443:8443
+

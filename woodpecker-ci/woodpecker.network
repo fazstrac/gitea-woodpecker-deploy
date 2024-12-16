@@ -1,0 +1,13 @@
+[Unit]
+Description=WoodpeckerCI network
+After=network-online.target
+
+[Network]
+NetworkName=woodpecker_network
+Subnet=10.90.0.0/24
+Gateway=10.90.0.1
+DNS=
+
+[Install]
+WantedBy=default.target
+

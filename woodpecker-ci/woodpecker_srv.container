@@ -1,0 +1,31 @@
+[Unit]
+Description=WoodpeckerCI Server
+
+[Container]
+Pod=woodpecker-ci.pod
+ContainerName=woodpecker_srv
+Image=docker.io/woodpeckerci/woodpecker-server:latest-alpine
+Environment=WOODPECKER_OPEN=true
+Environment=WOODPECKER_HOST=https://woodpecker.host:8443
+Environment=WOODPECKER_SERVER_CERT=/etc/ssl/woodpecker/woodpecker.cert.pem
+Environment=WOODPECKER_SERVER_KEY=/etc/ssl/woodpecker/woodpecker.key.pem
+Environment=WOODPECKER_SERVER_ADDR_TLS=:8443
+Environment=WOODPECKER_GITEA=true
+Environment=WOODPECKER_GITEA_URL=https://gitea.host:3000
+Environment=WOODPECKER_GITEA_CLIENT=
+Environment=WOODPECKER_GITEA_SECRET=
+Environment=WOODPECKER_AGENT_SECRET=anotherreasonablysecurepassword
+Volume=/etc/ssl/woodpecker:/etc/ssl/woodpecker:ro
+Volume=%h/woodpecker_srv:/var/lib/woodpecker
+HealthCmd=nc -z 127.0.0.1 8000
+
+[Service]
+Restart=on-failure
+
+[Service]
+Restart=always
+TimeoutStartSec=300
+
+[Install]
+WantedBy=default.target
+
